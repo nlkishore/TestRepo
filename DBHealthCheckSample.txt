@@ -82,4 +82,48 @@ public class TorqueConnectionTest {
 mvn clean verify -Pdb-health-check
 
 
+
 mvn exec:java -Pdb-health-check
+
+
+
+
+
+[DEBUG] Adding project dependency artifact: jackson-datatype-json-org to classpath
+[DEBUG] joining on thread Thread[com.mycompany.tools.TorqueConnectionTest.main(),5,com.mycompany.tools.TorqueConnectionTest]
+2025-08-28T05:02:40.424061700Z com.mycompany.tools.TorqueConnectionTest.main() ERROR 
+javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+	at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:704)
+	at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
+	at java.naming/javax.naming.InitialContext.getEnvironment(InitialContext.java:542)
+	at org.apache.torque.dsfactory.JndiDataSourceFactory.debugCtx(JndiDataSourceFactory.java:264)
+	at org.apache.torque.dsfactory.JndiDataSourceFactory.initJNDI(JndiDataSourceFactory.java:179)
+	at org.apache.torque.dsfactory.JndiDataSourceFactory.initialize(JndiDataSourceFactory.java:131)
+	at org.apache.torque.TorqueInstance.initDataSourceFactories(TorqueInstance.java:463)
+	at org.apache.torque.TorqueInstance.initialize(TorqueInstance.java:166)
+	at org.apache.torque.TorqueInstance.init(TorqueInstance.java:633)
+	at org.apache.torque.TorqueInstance.init(TorqueInstance.java:612)
+	at org.apache.torque.Torque.init(Torque.java:139)
+	at com.mycompany.tools.TorqueConnectionTest.main(TorqueConnectionTest.java:16)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:279)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2025-08-28T05:02:40.429054200Z com.mycompany.tools.TorqueConnectionTest.main() ERROR Error reading DataSourceFactory configuration
+org.apache.torque.TorqueException: javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+	at org.apache.torque.dsfactory.JndiDataSourceFactory.initJNDI(JndiDataSourceFactory.java:184)
+	at org.apache.torque.dsfactory.JndiDataSourceFactory.initialize(JndiDataSourceFactory.java:131)
+	at org.apache.torque.TorqueInstance.initDataSourceFactories(TorqueInstance.java:463)
+	at org.apache.torque.TorqueInstance.initialize(TorqueInstance.java:166)
+	at org.apache.torque.TorqueInstance.init(TorqueInstance.java:633)
+	at org.apache.torque.TorqueInstance.init(TorqueInstance.java:612)
+	at org.apache.torque.Torque.init(Torque.java:139)
+	at com.mycompany.tools.TorqueConnectionTest.main(TorqueConnectionTest.java:16)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:279)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+Caused by: javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
+	at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:704)
+	at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
+	at java.naming/javax.naming.InitialContext.getEnvironment(InitialContext.java:542)
+	at org.apache.torque.dsfactory.JndiDataSourceFactory.debugCtx(JndiDataSourceFactory.java:264)
+	at org.apache.torque.dsfactory.JndiDataSourceFactory.initJNDI(JndiDataSourceFactory.java:179)
+	... 9 more
+ Torque initialization failed: org.apache.torque.TorqueException: javax.naming.NoInitialContextException: Need to specify class name in environment or system property, or in an application resource file: java.naming.factory.initial
