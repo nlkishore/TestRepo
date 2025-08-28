@@ -1,0 +1,85 @@
+package com.mycompany.tools;
+
+import org.apache.torque.Torque;
+import org.apache.torque.TorqueException;
+import org.apache.torque.util.BasePeer;
+
+import java.sql.Connection;
+
+public class TorqueConnectionTest {
+    public static void main(String[] args) {
+        try {
+            Torque.init("src/main/resources/Torque.properties");
+
+            Connection conn = BasePeer.getConnection();
+            if (conn != null && !conn.isClosed()) {
+                System.out.println("✅ Oracle DB connection established successfully.");
+                conn.close();
+            } else {
+                System.out.println("❌ Connection object is null or closed.");
+                System.exit(1);
+            }
+        } catch (TorqueException te) {
+            System.err.println("❌ Torque initialization failed: " + te.getMessage());
+            System.exit(2);
+        } catch (Exception e) {
+            System.err.println("❌ Unexpected error: " + e.getMessage());
+            System.exit(3);
+        }
+    }
+}
+
+
+
+
+
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>3.1.0</version>
+      <executions>
+        <execution>
+          <id>db-health-check</id>
+          <phase>verify</phase>
+          <goals>
+            <goal>java</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <mainClass>com.mycompany.tools.TorqueConnectionTest</mainClass>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+
+
+
+<profiles>
+  <profile>
+    <id>db-health-check</id>
+    <activation>
+      <activeByDefault>false</activeByDefault>
+    </activation>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <mainClass>com.mycompany.tools.TorqueConnectionTest</mainClass>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+</profiles>
+
+
+mvn clean verify -Pdb-health-check
+
+
+mvn exec:java -Pdb-health-check
